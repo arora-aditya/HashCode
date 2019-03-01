@@ -5,10 +5,12 @@ class File:
     def __init__(self,
                  num_photos: int,
                  photos: dict,
-                 global_tags: dict):
+                 global_tags: dict,
+                 tag_to_id_map: dict):
         self.num_photos = num_photos
         self.photos = photos
         self.global_tags = global_tags
+        self.tag_to_id_map = tag_to_id_map
 
 def read_input_file(filename: str) -> File:
     """Reads the input of a Pizza problem.
@@ -25,6 +27,7 @@ def read_input_file(filename: str) -> File:
     total_photos = int(lines[0])
     photos = {}
     global_tags = {}
+    tag_to_id_map = {}
     for i in range(total_photos):
         params = lines[1+i].split()
         orient, num_tags, tags = params[0], int(params[1]), params[2:]
@@ -32,11 +35,18 @@ def read_input_file(filename: str) -> File:
         for tag in tags:
             if tag in global_tags:
                 mapped_tags.append(global_tags[tag])
+                tag_to_id_map[global_tags[tag]].append(i)
             else:
                 global_tags[tag] = len(global_tags)
+                tag_to_id_map[global_tags[tag]] = [i]
         assert len(tags) == num_tags
         photos[i] = Photo(id=i, orient=orient, tags=tags)
     # print(photos)
     print(f'{filename} read file, total tags: {len(global_tags)}, total photos: {total_photos}')
-    return File(num_photos=total_photos, photos=photos, global_tags=global_tags)
+    return File(
+        num_photos=total_photos,
+        photos=photos,
+        global_tags=global_tags,
+        tag_to_id_map=tag_to_id_map
+    )
 
