@@ -1,8 +1,4 @@
-# HashCode2019
-
-## Online Qualification Round
-![Total score](https://i.imgur.com/Lcg2J8Y.png)
-
+# HashCode
 
 ## Past Qualifications Round
 | Year | Problem                                                                                                                            | Test File                                                                                                                       |
