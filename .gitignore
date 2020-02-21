@@ -157,3 +157,4 @@ dmypy.json
 # custom stuff
 .idea
 PracticeProblem/output
+output
